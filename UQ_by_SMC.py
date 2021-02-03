@@ -142,7 +142,7 @@ def func(x,t,p,tf,Ca0,Cb0,e,u,dz): #Calculating the Time Derivatives of C and q 
     dCbdt[1:N-1] = -udive*(x[N+2:2*N]-x[N:2*N-2])/dz_mul_by2-E*dqbdt[1:N-1]
     dCbdt[N-1] = -udive*(x[2*N-1]-x[2*N-2])/dz-E*dqbdt[N-1]
 
-    return ret #関数funcの返り値
+    return ret
 
 #Functions to compute the LDF model
 def PROCESSMODEL(Ha,Hb,Ka,Kb,ba,bb,f0,tspan,tf,Ca0,Cb0,e,u,dz):
