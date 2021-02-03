@@ -139,7 +139,7 @@ def func(x,t,p,tf,Ca0,Cb0,e,u,dz): #Calculating the Time Derivatives of C and q 
     dCbdt[1:N-1] = -udive*(x[N+2:2*N]-x[N:2*N-2])/dz_mul_by2-E*dqbdt[1:N-1]
     dCbdt[N-1] = -udive*(x[2*N-1]-x[2*N-2])/dz-E*dqbdt[N-1]
 
-    return ret #関数funcの返り値
+    return ret
 
 #Functions to compute the LDF model
 def PROCESSMODEL(Ha,Hb,Ka,Kb,ba,bb,f0,tspan,tf,Ca0,Cb0,e,u,dz):
@@ -206,7 +206,7 @@ A = pm.Normal("A", mu=mu, tau=1/(ObsSigmam**2), value=DATA123, observed=True) #d
 model = pm.Model([Ham,Hbm,Kam,Kbm,bam,bbm,ObsSigmam]) #MCMC model definition
 
 sampler = pm.MCMC(model)
-sampler.sample(iter=50000,burn=30000, thin=2) #サンプリング回数，バーンイン，棄却幅の設定
+sampler.sample(iter=50000,burn=30000, thin=2) #Set sampling frequency, burn-in, and rejection width
 pm.Matplot.plot(sampler,format='png',path=dirname)
 
 #Record and display the time when UQ is finished.
@@ -224,10 +224,10 @@ EstimatedbbDist = bbm.trace()
 EstimatedObsSigmaDist = ObsSigmam.trace()
 Parameters = np.vstack((EstimatedHaDist,EstimatedHbDist,EstimatedKaDist,EstimatedKbDist,EstimatedbaDist,EstimatedbbDist,EstimatedObsSigmaDist))
 
-plt.rcParams["font.family"] ="Arial"#使用するフォント
-plt.rcParams["font.size"] = 18 #フォントサイズ
-plt.rcParams["xtick.direction"] = "in" #x軸の目盛線が内向き('in')か外向き('out')か双方向か('inout')
-plt.rcParams["ytick.direction"] = "in" #y軸の目盛線が内向き('in')か外向き('out')か双方向か('inout')
+plt.rcParams["font.family"] ="Arial"
+plt.rcParams["font.size"] = 18
+plt.rcParams["xtick.direction"] = "in"
+plt.rcParams["ytick.direction"] = "in"
 plt.rcParams["figure.figsize"] = (7,7)
 
 #Create a folder to store the final results of UQ.
